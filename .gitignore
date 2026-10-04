@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.db
+*.lnk
+*.jpg
+*.pt
+weights/
+app_backup.py
+app_before_*.py
+app_working_*.py
+test_yoloworld.py
