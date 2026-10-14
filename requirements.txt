@@ -2,3 +2,4 @@ streamlit
 pandas
 Pillow
 ultralytics-opencv-headless
+git+https://github.com/ultralytics/CLIP.git
