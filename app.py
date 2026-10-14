@@ -29,22 +29,177 @@ WILDLIFE_WORDS = (
     "gorilla", "chimpanzee", "baboon", "rhinoceros", "antelope", "coyote", "dingo",
 )
 
-# ---------- Styling (system fonts only, so it works offline) ----------
+# ---------- Styling (professional forest theme; works offline) ----------
 st.markdown(
     """
     <style>
-    h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; letter-spacing: .2px; }
-    .block-container { padding-top: 2rem; max-width: 1200px; }
-    .kpi { background:#17251F; border:1px solid #243A31; border-radius:10px;
-           padding:16px 18px; }
-    .kpi .label { color:#9DB5A8; font-size:.85rem; }
-    .kpi .value { font-family: Georgia, serif; font-size:2rem; line-height:1.2; color:#E8E2D0; }
-    .kpi.warn { border-left:4px solid #E0A33A; }
-    .badge { display:inline-block; padding:2px 10px; border-radius:20px;
-             font-size:.78rem; border:1px solid #E0A33A; color:#E0A33A; }
-    .alert-box { border-radius:10px; padding:18px 20px; font-size:1.1rem; }
-    .alert-on  { background:#3A1E16; border:1px solid #D1603D; color:#F3C9BC; }
-    .alert-off { background:#17251F; border:1px solid #2F5A47; color:#BFE0CF; }
+    :root {
+        --forest: #153B2E;
+        --forest-deep: #0D241C;
+        --leaf: #2E6B4F;
+        --mint: #DCEFE3;
+        --cream: #F7F5ED;
+        --gold: #D5A84F;
+        --ink: #20352B;
+        --muted: #708278;
+    }
+
+    /* Main canvas and typography */
+    .stApp {
+        background:
+            radial-gradient(ellipse at top right, rgba(213,168,79,.09), transparent 34%),
+            linear-gradient(180deg, #F8FAF7 0%, #F2F6F1 100%);
+        color: var(--ink);
+    }
+    .block-container {
+        max-width: 1320px;
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+    }
+    h1, h2, h3 {
+        font-family: Georgia, 'Times New Roman', serif;
+        letter-spacing: -.35px;
+        color: var(--forest-deep);
+    }
+    h1 { font-size: clamp(2rem, 3vw, 2.8rem); }
+    h2 { margin-top: .5rem; }
+    p, label, [data-testid="stCaptionContainer"] {
+        line-height: 1.55;
+    }
+
+    /* Sidebar */
+    section[data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #102D22 0%, #183E30 100%);
+        border-right: 1px solid rgba(255,255,255,.08);
+    }
+    section[data-testid="stSidebar"] * {
+        color: #F4F7F2;
+    }
+    section[data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
+        color: #B9CDBF;
+    }
+    section[data-testid="stSidebar"] hr {
+        border-color: rgba(255,255,255,.18);
+    }
+
+    /* Cards and metric tiles */
+    [data-testid="stMetric"] {
+        background: #FFFFFF;
+        border: 1px solid #E0E9E1;
+        border-radius: 16px;
+        padding: 18px 20px;
+        box-shadow: 0 5px 18px rgba(21,59,46,.055);
+    }
+    [data-testid="stMetricLabel"] {
+        color: #65796D;
+        font-size: .9rem;
+    }
+    [data-testid="stMetricValue"] {
+        color: var(--forest);
+        font-weight: 750;
+    }
+    .kpi {
+        background: linear-gradient(145deg, #153B2E, #214F3C);
+        border: 1px solid #2F654D;
+        border-radius: 16px;
+        padding: 18px 20px;
+        min-height: 108px;
+        box-shadow: 0 8px 20px rgba(21,59,46,.10);
+    }
+    .kpi .label {
+        color: #C4D9CB;
+        font-size: .85rem;
+        margin-bottom: 8px;
+    }
+    .kpi .value {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: clamp(1.65rem, 2.5vw, 2.2rem);
+        line-height: 1.2;
+        font-weight: 700;
+        color: #FFFDF5;
+    }
+    .kpi.warn {
+        border-left: 4px solid var(--gold);
+    }
+
+    /* Buttons */
+    .stButton > button, .stDownloadButton > button {
+        border-radius: 10px;
+        border: 1px solid #24563F;
+        padding: .62rem 1.1rem;
+        font-weight: 650;
+        transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, #1D5A3D, #2F7952);
+        color: #FFFFFF;
+        border: 0;
+        box-shadow: 0 5px 13px rgba(29,90,61,.18);
+    }
+    .stButton > button:hover, .stDownloadButton > button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 7px 16px rgba(21,59,46,.12);
+        border-color: var(--gold);
+    }
+
+    /* Inputs, uploads, tables and charts */
+    [data-testid="stFileUploader"] section {
+        background: #FFFFFF;
+        border: 1px dashed #A8C4B1;
+        border-radius: 14px;
+    }
+    [data-testid="stDataFrame"], [data-testid="stTable"] {
+        border: 1px solid #E0E9E1;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    [data-testid="stExpander"] {
+        background: rgba(255,255,255,.72);
+        border: 1px solid #E0E9E1;
+        border-radius: 12px;
+    }
+    hr {
+        border-color: #DFE8E0;
+        margin: 1.5rem 0;
+    }
+    .badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 999px;
+        font-size: .76rem;
+        font-weight: 700;
+        letter-spacing: .7px;
+        border: 1px solid #D5A84F;
+        color: #805B16;
+        background: #FFF8E7;
+    }
+    .alert-box {
+        border-radius: 14px;
+        padding: 18px 20px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        box-shadow: 0 5px 16px rgba(21,59,46,.06);
+    }
+    .alert-on {
+        background: #FFF0EB;
+        border: 1px solid #D96D54;
+        color: #8B2E20;
+    }
+    .alert-off {
+        background: #EAF6EE;
+        border: 1px solid #77B28A;
+        color: #205B37;
+    }
+
+    /* Make images feel integrated into the interface */
+    [data-testid="stImage"] img {
+        border-radius: 14px;
+    }
+
+    @media (max-width: 768px) {
+        .block-container { padding: 1.2rem 1rem 2rem; }
+        .kpi { padding: 14px; }
+    }
     </style>
     """,
     unsafe_allow_html=True,
