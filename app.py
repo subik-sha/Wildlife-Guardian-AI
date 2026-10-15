@@ -29,178 +29,149 @@ WILDLIFE_WORDS = (
     "gorilla", "chimpanzee", "baboon", "rhinoceros", "antelope", "coyote", "dingo",
 )
 
-# ---------- Styling (professional forest theme; works offline) ----------
+# ---------- Styling (system fonts only, so it works offline) ----------
 st.markdown(
     """
-    <style>
-    :root {
-        --forest: #153B2E;
-        --forest-deep: #0D241C;
-        --leaf: #2E6B4F;
-        --mint: #DCEFE3;
-        --cream: #F7F5ED;
-        --gold: #D5A84F;
-        --ink: #20352B;
-        --muted: #708278;
+    
+<style>
+    /* Overall page */
+    .stApp {
+        background: linear-gradient(135deg, #f4f8f1 0%, #e7f0e5 55%, #f8f5e9 100%);
+        color: #20382d;
     }
 
-    /* Main canvas and typography */
-    .stApp {
-        background:
-            radial-gradient(ellipse at top right, rgba(213,168,79,.09), transparent 34%),
-            linear-gradient(180deg, #F8FAF7 0%, #F2F6F1 100%);
-        color: var(--ink);
-    }
     .block-container {
-        max-width: 1320px;
         padding-top: 2rem;
-        padding-bottom: 3rem;
+        padding-bottom: 2rem;
+        max-width: 1200px;
     }
+
     h1, h2, h3 {
         font-family: Georgia, 'Times New Roman', serif;
-        letter-spacing: -.35px;
-        color: var(--forest-deep);
-    }
-    h1 { font-size: clamp(2rem, 3vw, 2.8rem); }
-    h2 { margin-top: .5rem; }
-    p, label, [data-testid="stCaptionContainer"] {
-        line-height: 1.55;
+        letter-spacing: .2px;
+        color: #214d37;
     }
 
     /* Sidebar */
-    section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #102D22 0%, #183E30 100%);
-        border-right: 1px solid rgba(255,255,255,.08);
-    }
-    section[data-testid="stSidebar"] * {
-        color: #F4F7F2;
-    }
-    section[data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
-        color: #B9CDBF;
-    }
-    section[data-testid="stSidebar"] hr {
-        border-color: rgba(255,255,255,.18);
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #173e2c, #28583d);
     }
 
-    /* Cards and metric tiles */
-    [data-testid="stMetric"] {
-        background: #FFFFFF;
-        border: 1px solid #E0E9E1;
-        border-radius: 16px;
-        padding: 18px 20px;
-        box-shadow: 0 5px 18px rgba(21,59,46,.055);
+    [data-testid="stSidebar"] * {
+        color: #f2f6ed;
     }
-    [data-testid="stMetricLabel"] {
-        color: #65796D;
-        font-size: .9rem;
-    }
-    [data-testid="stMetricValue"] {
-        color: var(--forest);
-        font-weight: 750;
-    }
+
+    /* KPI cards */
     .kpi {
-        background: linear-gradient(145deg, #153B2E, #214F3C);
-        border: 1px solid #2F654D;
-        border-radius: 16px;
-        padding: 18px 20px;
-        min-height: 108px;
-        box-shadow: 0 8px 20px rgba(21,59,46,.10);
+        background: #ffffff;
+        border: 1px solid #d6e5d7;
+        border-radius: 14px;
+        padding: 18px;
+        box-shadow: 0 4px 14px rgba(32, 72, 48, .08);
     }
+
     .kpi .label {
-        color: #C4D9CB;
+        color: #587463;
         font-size: .85rem;
-        margin-bottom: 8px;
     }
+
     .kpi .value {
-        font-family: Georgia, 'Times New Roman', serif;
-        font-size: clamp(1.65rem, 2.5vw, 2.2rem);
-        line-height: 1.2;
-        font-weight: 700;
-        color: #FFFDF5;
+        font-family: Georgia, serif;
+        font-size: 2rem;
+        line-height: 1.3;
+        color: #214d37;
+        overflow-wrap: anywhere;
     }
+
     .kpi.warn {
-        border-left: 4px solid var(--gold);
+        border-left: 4px solid #d6a23a;
     }
 
     /* Buttons */
-    .stButton > button, .stDownloadButton > button {
-        border-radius: 10px;
-        border: 1px solid #24563F;
-        padding: .62rem 1.1rem;
-        font-weight: 650;
-        transition: transform .15s ease, box-shadow .15s ease;
-    }
-    .stButton > button[kind="primary"] {
-        background: linear-gradient(135deg, #1D5A3D, #2F7952);
-        color: #FFFFFF;
-        border: 0;
-        box-shadow: 0 5px 13px rgba(29,90,61,.18);
-    }
-    .stButton > button:hover, .stDownloadButton > button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 7px 16px rgba(21,59,46,.12);
-        border-color: var(--gold);
+    .stButton > button,
+    .stDownloadButton > button {
+        border-radius: 9px;
+        border: 1px solid #2f704a;
+        transition: .2s ease;
     }
 
-    /* Inputs, uploads, tables and charts */
-    [data-testid="stFileUploader"] section {
-        background: #FFFFFF;
-        border: 1px dashed #A8C4B1;
-        border-radius: 14px;
+    .stButton > button[kind="primary"] {
+        background: #286441;
+        color: white;
     }
-    [data-testid="stDataFrame"], [data-testid="stTable"] {
-        border: 1px solid #E0E9E1;
+
+    .stButton > button:hover,
+    .stDownloadButton > button:hover {
+        border-color: #1e5636;
+        color: #1e5636;
+    }
+
+    /* Upload area */
+    [data-testid="stFileUploader"] {
+        background: rgba(255, 255, 255, .7);
+        border: 1px dashed #9dbda4;
         border-radius: 12px;
+        padding: 10px;
+    }
+
+    /* Tables */
+    [data-testid="stDataFrame"],
+    [data-testid="stTable"] {
+        border: 1px solid #d6e5d7;
+        border-radius: 10px;
         overflow: hidden;
     }
-    [data-testid="stExpander"] {
-        background: rgba(255,255,255,.72);
-        border: 1px solid #E0E9E1;
-        border-radius: 12px;
-    }
-    hr {
-        border-color: #DFE8E0;
-        margin: 1.5rem 0;
-    }
+
+    /* Alert badges and messages */
     .badge {
         display: inline-block;
-        padding: 5px 12px;
-        border-radius: 999px;
-        font-size: .76rem;
-        font-weight: 700;
-        letter-spacing: .7px;
-        border: 1px solid #D5A84F;
-        color: #805B16;
-        background: #FFF8E7;
-    }
-    .alert-box {
-        border-radius: 14px;
-        padding: 18px 20px;
-        font-size: 1.05rem;
-        font-weight: 600;
-        box-shadow: 0 5px 16px rgba(21,59,46,.06);
-    }
-    .alert-on {
-        background: #FFF0EB;
-        border: 1px solid #D96D54;
-        color: #8B2E20;
-    }
-    .alert-off {
-        background: #EAF6EE;
-        border: 1px solid #77B28A;
-        color: #205B37;
+        padding: 4px 11px;
+        border-radius: 20px;
+        font-size: .78rem;
+        border: 1px solid #d6a23a;
+        color: #855c12;
+        background: #fff8e5;
     }
 
-    /* Make images feel integrated into the interface */
+    .alert-box {
+        border-radius: 12px;
+        padding: 18px 20px;
+        font-size: 1.05rem;
+    }
+
+    .alert-on {
+        background: #fff0e9;
+        border: 1px solid #d1603d;
+        color: #8b3020;
+    }
+
+    .alert-off {
+        background: #e8f5eb;
+        border: 1px solid #77ae87;
+        color: #245a39;
+    }
+
+    /* Images and expandable sections */
     [data-testid="stImage"] img {
-        border-radius: 14px;
+        border-radius: 12px;
+    }
+
+    [data-testid="stExpander"] {
+        border: 1px solid #d6e5d7;
+        border-radius: 10px;
     }
 
     @media (max-width: 768px) {
-        .block-container { padding: 1.2rem 1rem 2rem; }
-        .kpi { padding: 14px; }
+        .block-container {
+            padding-top: 1rem;
+        }
+
+        .kpi .value {
+            font-size: 1.5rem;
+        }
     }
-    </style>
+</style>
+
     """,
     unsafe_allow_html=True,
 )
@@ -376,10 +347,15 @@ def run_detection(image, conf):
 
 
 # ---------- Sidebar navigation ----------
+
 st.sidebar.title("🐘 Wildlife Guardian")
 st.sidebar.caption("AI wildlife detection and safety alerts")
-page = st.sidebar.radio("Go to", ["Dashboard", "Detect", "Alerts", "History", "About"],
-                        label_visibility="collapsed")
+page = st.sidebar.radio(
+    "Go to",
+    ["Dashboard", "Detect", "Alerts", "History", "Import old history", "About"],
+    label_visibility="collapsed"
+)
+
 st.sidebar.divider()
 st.sidebar.caption("Prototype: works on uploaded images. Distance is simulated.")
 
@@ -532,22 +508,187 @@ elif page == "History":
                           horizontal=True)
         view = det if choice == "All" else det[det["Status"] == choice]
         st.dataframe(view, use_container_width=True, hide_index=True)
-        st.download_button("Download CSV", view.to_csv(index=False).encode("utf-8"),
-                           "wildlife_detection_history.csv", "text/csv")
+        
+        st.download_button(
+            "Download CSV",
+            view.to_csv(index=False).encode("utf-8"),
+            "wildlife_detection_history.csv",
+            "text/csv",
+            key="history_download_csv"
+        )
+
+if page == "History":
+    st.title("Detection history")
+    det = load_detections()
+
+    if det.empty:
+        st.info("No scans yet. Open Detect to run the first one.")
+    
+    else:
+        choice = st.radio(
+            "Show",
+            ["All", "Animal detected", "No animal detected"],
+            horizontal=True,
+            key="history_filter_radio"
+        )
+
+        view = det if choice == "All" else det[det["Status"] == choice]
+
+        st.dataframe(
+            view,
+            use_container_width=True,
+            hide_index=True
+        )
+
+        st.download_button(
+            "Download CSV",
+            view.to_csv(index=False).encode("utf-8"),
+            "wildlife_detection_history.csv",
+            "text/csv"
+        )
+
+elif page == "Import old history":
+    st.title("Import old history")
+    st.warning("Upload your old CSV files here.")
+
+    det_file = st.file_uploader(
+        "Upload detection_history.csv",
+        type=["csv"],
+        key="old_det"
+    )
+
+    alert_file = st.file_uploader(
+        "Upload alert_history.csv",
+        type=["csv"],
+        key="old_alert"
+    )
+
+    if st.button("Import old records"):
+        if det_file is None and alert_file is None:
+            st.error("Please upload at least one CSV file.")
+        else:
+            try:
+                added_det = 0
+                added_alert = 0
+
+                with db() as conn:
+                    if det_file is not None:
+                        det_df = pd.read_csv(det_file)
+                        st.write("CSV detection rows:", len(det_df))
+                        required = {
+                            "date_time", "animal_name", "confidence", "status"
+                        }
+
+                        if not required.issubset(det_df.columns):
+                            st.error("Detection CSV columns are incorrect.")
+                            st.stop()
+
+                        for _, r in det_df.iterrows():
+                            values = (
+                                str(r["date_time"]),
+                                str(r["animal_name"]),
+                                float(r["confidence"]),
+                                str(r["status"])
+                            )
+
+                            exists = conn.execute(
+                                """SELECT 1 FROM detection_history
+                                WHERE date_time=? AND animal_name=?
+                                AND confidence=? AND status=? LIMIT 1""",
+                                values
+                            ).fetchone()
+
+                            if not exists:
+                                conn.execute(
+                                    """INSERT INTO detection_history
+                                    (date_time, animal_name, confidence, status)
+                                    VALUES (?, ?, ?, ?)""",
+                                    values
+                                )
+                                added_det += 1
+
+                    if alert_file is not None:
+                        alert_df = pd.read_csv(alert_file)
+                        st.write("CSV alert rows:", len(alert_df))
+                        required = {
+                            "date_time", "distance_km", "alert_status"
+                        }
+
+                        if not required.issubset(alert_df.columns):
+                            st.error("Alert CSV columns are incorrect.")
+                            st.stop()
+
+                        for _, r in alert_df.iterrows():
+                            values = (
+                                str(r["date_time"]),
+                                float(r["distance_km"]),
+                                str(r["alert_status"])
+                            )
+
+                            exists = conn.execute(
+                                """SELECT 1 FROM alert_history
+                                WHERE date_time=? AND distance_km=?
+                                AND alert_status=? LIMIT 1""",
+                                values
+                            ).fetchone()
+
+                            if not exists:
+                                conn.execute(
+                                    """INSERT INTO alert_history
+                                    (date_time, distance_km, alert_status)
+                                    VALUES (?, ?, ?)""",
+                                    values
+                                )
+                                added_alert += 1
+
+                st.success(
+                    f"Imported {added_det} scans and {added_alert} alerts!"
+                )
+                with db() as conn:
+                    det_count = conn.execute(
+                        "SELECT COUNT(*) FROM detection_history"
+                    ).fetchone()[0]
+
+                    alert_count = conn.execute(
+                        "SELECT COUNT(*) FROM alert_history"
+                    ).fetchone()[0]
+
+                st.write("Total detection records in database:", det_count)
+                st.write("Total alert records in database:", alert_count)
+            except Exception as e:
+                st.error(f"Import failed: {e}")
 
 else:
     st.title("About")
-    st.write("Wildlife Guardian AI detects selected wildlife in uploaded images and "
-             "demonstrates a distance-based safety alert.")
+    st.write(
+        "Wildlife Guardian AI detects selected wildlife in uploaded images "
+        "and demonstrates a distance-based safety alert."
+    )
+
     left, right = st.columns(2)
+
     with left:
         st.subheader("Working now")
-        st.markdown("- Image upload with validation\n- YOLO-World finds animals, YOLO11 names the species\n"
-                    "- Detection history in SQLite, CSV export\n- Simulated 2 km alert")
+        st.markdown(
+            "- Image upload with validation\n"
+            "- YOLO-World finds animals, YOLO11 names the species\n"
+            "- Detection history in SQLite, CSV export\n"
+            "- Simulated 2 km alert"
+        )
+
     with right:
         st.subheader("Not implemented yet")
-        st.markdown("- Live CCTV or video\n- Real GPS distance\n- Mobile notifications\n"
-                    "- IoT sensors, cloud deployment\n- Custom-trained wildlife model")
-    st.caption("Uses pretrained models. The classifier knows 1000 general ImageNet classes, so some "
-               "animals (for example giraffe or deer) may show as unidentified. "
-               "Predictions can be wrong and need human verification.")
+        st.markdown(
+            "- Live CCTV or video\n"
+            "- Real GPS distance\n"
+            "- Mobile notifications\n"
+            "- IoT sensors, cloud deployment\n"
+            "- Custom-trained wildlife model"
+        )
+
+    st.caption(
+        "Uses pretrained models. The classifier knows 1000 general "
+        "ImageNet classes, so some animals (for example giraffe or deer) "
+        "may show as unidentified. Predictions can be wrong and need "
+        "human verification."
+    )

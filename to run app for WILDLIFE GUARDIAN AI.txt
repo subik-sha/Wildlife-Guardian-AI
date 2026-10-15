@@ -1,0 +1,18 @@
+1 Laptop-la project folder open pannunga
+
+VS Code:
+
+C:\Wildlife-Guardian-AI
+
+2 Virtual environment activate pannunga
+
+.\.venv\Scripts\Activate.ps1
+
+Prompt ippadi maarum:
+
+(.venv) PS C:\Wildlife-Guardian-AI>
+
+3 App start pannunga
+
+
+python -m streamlit run app.py
